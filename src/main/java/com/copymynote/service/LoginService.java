@@ -12,7 +12,7 @@ public class LoginService {
 	@Autowired
 	private UserRepository userRepository;
 
-
+//This method validate username & password from Database
 	public User validateUser(String userid, String password,boolean isEmail) {
 
 		User user;

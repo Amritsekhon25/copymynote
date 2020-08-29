@@ -204,8 +204,8 @@
 
 
 
-<body >
-<%
+<body>
+	<%
 response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
 request.setAttribute("isBackButtonPressed","true");
 %>
@@ -217,26 +217,20 @@ request.setAttribute("isBackButtonPressed","true");
 					<img src="assets/images/logo-cmn-96x84.png" alt=""><span>Copy
 							My Note</span>
 				</div>
-					<div class="menu">
+				<div class="menu">
 					<ul>
-						<li><a
-							href="index.html"
-							target="_blank">About us</a>
-						<li><a
-							href="index.html"
-							target="_blank">Services</a></li>
-						<li><a
-							href="termsandconditions.html"
-							target="_blank">Terms & Conditions</a></li>
-						<li><a
-							href="index.html"
-							target="_blank">Contact us</a>
-						<li><a
-							href="index.html"
-							target="_blank">Support us</a>
+						<li><a href="AboutUs.html" target="_blank">About us</a>
+							<li><a href="Services.html" target="_blank">Services</a></li>
+							<li><a href="Term&Conditions.html" target="_blank">Terms
+									& Conditions</a></li>
+							<li><a href="ContactUs.html" target="_blank">Contact us</a>
+								<li><a href="AboutUs.html" target="_blank">Support us</a></li> <c:if
+									test="${isLoggedIn eq true}">
+									<li><a href="logout">Logout</a></li>
+								</c:if>
 					</ul>
 				</div>
-			
+
 
 			</div>
 		</div>
@@ -249,15 +243,18 @@ request.setAttribute("isBackButtonPressed","true");
 				<div class="note-inner">
 					<h3>Welcome ${loggedInUserName}</h3>
 					<div class="add-note">
-						<span style="color: red"> ${error}</span>
-						<span style="color: red"> ${noteLimitError}</span>
-
+						<span style="color: red"> ${error}</span> <span style="color: red">
+							${noteLimitError}</span> <span style="color: red"> <c:if
+								test="${emptyList eq true}">
+							  Title Doesn't exist
+					</c:if>
+						</span>
 
 						<form action="addNote" method="post" autocomplete="on"
 							onsubmit="return saveConfirmaton()" enctype="multipart/form-data">
 
 							<h1>Add Note</h1>
-							
+
 
 							<p>
 								<label for="title" class="title" data-icon=""> Add Title
@@ -285,14 +282,19 @@ request.setAttribute("isBackButtonPressed","true");
 
 					</div>
 					<c:if test="${not empty notelist}">
-						<div class="note-list"><div><h3>Your Notes</h3> 	<div class="search-bar">
-					<form action="" method="get">
-						<input type="text" name="search" id="search"
-							placeholder="search note"></input> <input type="image"
-							src="/images/search_icon.png"></input>
+						<div class="note-list">
+							<div>
+								<h3>Your Notes</h3>
+								<div class="search-bar">
+									<form action="" method="get">
+										<input type="text" name="search" id="search"
+											placeholder="search note"></input> <input type="image"
+											src="/images/search_icon.png"></input>
 
-					</form>
-				</div></div></div>
+									</form>
+								</div>
+							</div>
+						</div>
 
 						<c:forEach items="${notelist}" var="listValue">
 							<div class="popup-sec">
@@ -385,7 +387,9 @@ request.setAttribute("isBackButtonPressed","true");
 						</c:forEach>
 					</c:if>
 
+
 				</div>
+
 			</div>
 		</c:if>
 		<c:if test="${not empty lists}">

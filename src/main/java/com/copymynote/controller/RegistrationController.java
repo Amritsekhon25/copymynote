@@ -23,12 +23,15 @@ public class RegistrationController {
 	@Autowired
 	private UserRepository userRepository;
 
+	// This method open Registration page
 	@RequestMapping(value="/register", method = RequestMethod.GET)
 	public String showLoginPage(ModelMap model){
 
 
 		return "register";
 	}
+	//Register page saveUser action called and check all validation like duplicate email/username etc and if 
+	// sucessfully register then redirect to view note page
 	@RequestMapping(value="/saveUser", method = RequestMethod.POST)
 	public String saveUser(ModelMap model,@ModelAttribute("user") User user,HttpServletRequest request){
 
@@ -45,10 +48,7 @@ public class RegistrationController {
 		
 
 		boolean isError=false;
-		 /*String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,20}$"; 
-	        Pattern p = Pattern.compile(regex); 
-
-	        Matcher m = p.matcher(user.getPassword()); */
+	
 
 		if(alreadyEmailFound!=null)
 		{
@@ -77,11 +77,7 @@ public class RegistrationController {
 			isError=true;
 
 		}
-	/*	else if(!m.matches())
-		{
-			model.put("errorMessage", "Please use secure password,which contain atleast 8 characters including one upper, lower case,one digit and one special charactor");
-			isError=true;
-		}*/
+
 			
 		else
 		{

@@ -42,7 +42,9 @@ public class NoteController {
 	@Autowired
 	private GetNotesService getNotesService;
 
-
+	
+// This method used for adding the note  either from text filed or from files 
+	// and have all the check for maximum notes
 	@RequestMapping(value="/addNote", method = RequestMethod.POST)
 	public String  showWelcomePage(ModelMap model,HttpServletRequest request,@RequestParam("saveFile") MultipartFile file,
 			RedirectAttributes redirectAttributes) throws Exception{
@@ -69,7 +71,7 @@ public class NoteController {
 		if(!StringUtils.isEmpty(fileContent))
 		{
 			noteToAdded=fileContent;
-			titleToAdded=file.getName();
+			titleToAdded=file.getOriginalFilename();
 		}
 
 		Note note =new Note();
@@ -83,12 +85,13 @@ public class NoteController {
 			noteRepository.saveAndFlush(note);
 		}
 		catch (Exception e) {
-			request.getSession().setAttribute("noteLimitError", true);
+			request.getSession().setAttribute("isError", true);
 		}
 		return "redirect:/viewNote";
 
 	}
 
+	// This metod is used for view the list of user-notes. It have the pagination & soring  fuctionality
 	@RequestMapping(value="/viewNote", method = RequestMethod.GET)
 	public ModelAndView getNotesByUser(
 			@RequestParam(defaultValue = "1") Integer pageNo, 
@@ -149,6 +152,7 @@ public class NoteController {
 		return map; 
 	}
 
+	// This method is used to delete note
 	@GetMapping("delete/{id}")
 	public String deleteNote(@PathVariable Long id,HttpServletRequest request) {
 
@@ -160,6 +164,7 @@ public class NoteController {
 		return "redirect:/viewNote";
 
 	}
+	// This method is used to edit note
 	@RequestMapping(value="/edit/{id}", method = RequestMethod.POST)
 	public String  showWelcomePage1(ModelMap model,HttpServletRequest request,
 			RedirectAttributes redirectAttributes,@PathVariable Long id) throws Exception{
@@ -193,6 +198,8 @@ public class NoteController {
 		return "redirect:/viewNote";
 
 	}
+	
+	// This method is used to search note
 	public ModelAndView searchNoteByTitle(@PathVariable String title,HttpServletRequest request) {
 		List<Note> noteList=noteRepository.findBytitleContaining(title);
 		String userID=(String) request.getSession().getAttribute("userId");
@@ -215,6 +222,9 @@ public class NoteController {
 			}
 
 			map.addObject("notelist", searchNote);
+			if(searchNote.isEmpty())
+			map.addObject("emptyList", true);
+
 			map.addObject("isSearch", true);
 			map.addObject("isLoggedIn", true);
 		}

@@ -21,12 +21,13 @@ public class LoginController {
 	LoginService loginService;
 
 
-
+     // Login Form Page
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String showLoginPage(ModelMap model){
 		return "login";
 	}
 
+	  // Login Form submit action. This method validate user crediential  and set session if sucessfully loggin
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public String showWelcomePage(ModelMap model,HttpServletRequest request){
 		String name=request.getParameter("username");
@@ -47,6 +48,7 @@ public class LoginController {
 	}
 
 	
+	//Logout method which will invalidate the session when user click on logged out
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public String logout(ModelMap model,HttpServletRequest request){
 		HttpSession session=request.getSession();  

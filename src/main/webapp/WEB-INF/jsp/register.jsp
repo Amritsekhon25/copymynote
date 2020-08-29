@@ -36,14 +36,21 @@
 
 	// Function to check Whether both passwords 
 	// is same or not. 
-	function checkPassword(form) {
+	function validation(form) {
+		
 		password1 = form.password.value;
 		password2 = form.confirm_password.value;
+		
 
 		var mob = /^[1-9]\d{9}$/;
 		var passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 		var txtMobile = form.mobile.value;
-		alert(txtmobile)
+		if (txtMobile === "") {
+
+		} else if (!mob.test(txtMobile)) {
+			alert("Please enter valid mobile number.");
+			return false;
+		}
 
 		// If password not entered 
 		if (password1 == '')
@@ -63,13 +70,8 @@
 			alert("Please use secure password,which contain atleast 8 character including one upper, lower case,one digit and one special charactor.");
 			return false;
 		}
-		if (txtmobile == '') {
-
-		} else(!mob.test(txtMobile)) {
-			alert("Please enter valid mobile number.");
-			mobile.focus();
-			return false;
-		}
+		
+		
 
 	}
 </script>
@@ -94,22 +96,22 @@ response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
 					<img src="assets/images/logo-cmn-96x84.png" alt=""><span>Copy
 						My Note</span>
 				</div>
-				<div class="menu">
+			<div class="menu">
 					<ul>
 						<li><a
-							href="index.html"
+							href="AboutUs.html"
 							target="_blank">About us</a>
 						<li><a
-							href="index.html"
+							href="Services.html"
 							target="_blank">Services</a></li>
 						<li><a
-							href="termsandconditions.html"
+							href="Term&Conditions.html"
 							target="_blank">Terms & Conditions</a></li>
 						<li><a
-							href="index.html"
+							href="ContactUs.html"
 							target="_blank">Contact us</a>
 						<li><a
-							href="index.html"
+							href="AboutUs.html"
 							target="_blank">Support us</a>
 					</ul>
 				</div>
@@ -130,7 +132,7 @@ response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
 						<span style="color: red"> ${errorMessage}</span>
 
 						<form action="saveUser" method="post" autocomplete="on"
-							onSubmit="return checkPassword(this)" modelAttribute="emp">
+							onSubmit="return validation(this)" modelAttribute="emp">
 							<h1>Sign up</h1>
 							<p>
 								<label for="uname" class="uname" data-icon="u">Username*</label>
@@ -193,7 +195,7 @@ response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
 							<p class="tnc">
 								<input type="checkbox" name="terms" required="required">
 								I accept the <a target="_blank"
-									href="https://copymynotemini.blogspot.com/2020/08/terms-and-conditions.html">Terms
+									href="Term&Conditions.html">Terms
 									and Conditions</a>
 							</p>
 

@@ -37,19 +37,19 @@ response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
 				<div class="menu">
 					<ul>
 						<li><a
-							href="index.html"
+							href="AboutUs.html"
 							target="_blank">About us</a>
 						<li><a
-							href="index.html"
+							href="Services.html"
 							target="_blank">Services</a></li>
 						<li><a
-							href="termsandconditions.html"
+							href="Term&Conditions.html"
 							target="_blank">Terms & Conditions</a></li>
 						<li><a
-							href="index.html"
+							href="ContactUs.html"
 							target="_blank">Contact us</a>
 						<li><a
-							href="index.html"
+							href="AboutUs.html"
 							target="_blank">Support us</a>
 					</ul>
 				</div>
